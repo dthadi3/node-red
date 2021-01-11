@@ -19,3 +19,23 @@ matrix:
     - node_js: "8"
       script:
         - ./node_modules/.bin/grunt no-coverage
+#Added power jobs
+    - node_js: "14"
+      arch: ppc64le
+      script:
+        - ./node_modules/.bin/grunt && ( cat coverage/lcov.info | $(npm get prefix)/bin/coveralls || true ) && rm -rf coverage
+        #    - scripts/install-ui-test-dependencies.sh && grunt test-ui
+      before_script:
+        - npm install -g coveralls
+    - node_js: "12"
+      arch: ppc64le
+      script:
+        - ./node_modules/.bin/grunt no-coverage
+    - node_js: "10"
+      arch: ppc64le
+      script:
+        - ./node_modules/.bin/grunt no-coverage
+    - node_js: "8"
+      arch: ppc64le
+      script:
+        - ./node_modules/.bin/grunt no-coverage
